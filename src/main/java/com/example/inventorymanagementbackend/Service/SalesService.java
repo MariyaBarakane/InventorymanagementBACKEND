@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SalesService {
 
-    public void save(double Price , Orders Order) ;
+    public void save(Sales sale) ;
     public List<Sales> getAllSales();
 }

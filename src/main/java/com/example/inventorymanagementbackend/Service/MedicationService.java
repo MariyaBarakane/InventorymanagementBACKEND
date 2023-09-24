@@ -10,12 +10,10 @@ public interface MedicationService {
     MEDICATION saveMedication(MEDICATION medication);
     MEDICATION getMedication(Long medicationId) throws MedicationNotFound;
     void deleteMedication(Long medicationId) throws MedicationNotFound;
-    List<Orders> Trackmedication(Long medicationId);
 
     int getQuantity(long medicationid) throws MedicationNotFound;
-    public void updateQuantity(MEDICATION medication) throws MedicationNotFound;
     public List<MEDICATION> findMedication() ;
 
 
-
+    void updateQuantity(long medicationID, int quantity) throws MedicationNotFound;
 }

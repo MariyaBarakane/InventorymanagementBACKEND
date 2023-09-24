@@ -6,6 +6,7 @@ import com.example.inventorymanagementbackend.Exceptions.MedicationNotFound;
 import com.example.inventorymanagementbackend.Exceptions.PharmacyNotFoundException;
 import com.example.inventorymanagementbackend.Repositories.MedicationRepository;
 import com.example.inventorymanagementbackend.Repositories.PharmacyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,9 @@ import java.util.List;
 @Service
 public class PharmacyServiceImpl implements PharmacyService{
 
+    @Autowired
     PharmacyRepository pharmacyRepository;
+
 
     @Override
     public List<Pharmacy> getAllPharmacy() {

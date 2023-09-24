@@ -16,10 +16,7 @@ public class MEDICATION {
     private String Description ;
     private double Price ;
     private int Quantity;
-    private Date Date_Added ;
-    private Date EXP_Date;
-    @ManyToOne
-    private Orders order;
+
 
 
 

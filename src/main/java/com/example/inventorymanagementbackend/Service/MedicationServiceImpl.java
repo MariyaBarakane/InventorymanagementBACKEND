@@ -1,19 +1,16 @@
 package com.example.inventorymanagementbackend.Service;
 
 import com.example.inventorymanagementbackend.Entities.MEDICATION;
-import com.example.inventorymanagementbackend.Entities.Orders;
 import com.example.inventorymanagementbackend.Exceptions.MedicationNotFound;
 import com.example.inventorymanagementbackend.Repositories.MedicationRepository;
 import com.example.inventorymanagementbackend.Repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DialectOverride;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,9 +18,10 @@ import java.util.Optional;
 @Data
 public class MedicationServiceImpl implements MedicationService{
 
-    @Autowired
 
+@Autowired
     private MedicationRepository medicationRepository;
+@Autowired
     private OrderRepository orderRepository;
 
     @Override
@@ -49,10 +47,7 @@ public class MedicationServiceImpl implements MedicationService{
 
     }
 
-    @Override
-    public List<Orders> Trackmedication(Long medicationId) {
-        return orderRepository.findBymedicationId(medicationId) ;
-    }
+
 
     @Override
     public int getQuantity(long medicationId) throws MedicationNotFound {
@@ -64,8 +59,8 @@ public class MedicationServiceImpl implements MedicationService{
 
     @Override
 
-    public void updateQuantity(MEDICATION medication) throws MedicationNotFound {
-        int quantity =getMedication(medication.getId()).getQuantity();
-        getMedication(medication.getId()).setQuantity(quantity-medication.getQuantity());
+    public void updateQuantity(long medicationID, int quantity) throws MedicationNotFound {;
+        MEDICATION  medi = getMedication(medicationID);
+        medi.setQuantity(medi.getQuantity()-quantity);
     }
 }

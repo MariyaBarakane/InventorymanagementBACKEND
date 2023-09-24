@@ -1,11 +1,10 @@
 package com.example.inventorymanagementbackend.Controllers;
 
-import com.example.inventorymanagementbackend.Entities.MEDICATION;
-import com.example.inventorymanagementbackend.Entities.Orders;
-import com.example.inventorymanagementbackend.Entities.Pharmacy;
+import com.example.inventorymanagementbackend.Entities.*;
 import com.example.inventorymanagementbackend.Exceptions.MedicationNotFound;
 import com.example.inventorymanagementbackend.Exceptions.OrderInvalidException;
 import com.example.inventorymanagementbackend.Service.MedicationService;
+import com.example.inventorymanagementbackend.Service.OrderLineServiceImpl;
 import com.example.inventorymanagementbackend.Service.OrdersService;
 import com.example.inventorymanagementbackend.Service.PharmacyService;
 import lombok.AllArgsConstructor;
@@ -20,6 +19,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@CrossOrigin("*")
 public class MedicationRestController {
 
     @Autowired
@@ -27,7 +27,14 @@ public class MedicationRestController {
     @Autowired
     private OrdersService ordersService;
 
+    @Autowired
+    OrderLineServiceImpl orderLineService;
+    @Autowired
     private PharmacyService pharmacyService;
+
+
+
+
     @GetMapping("/medication")
     public List<MEDICATION> medication(){
         return merdicationservice.findMedication();
@@ -35,6 +42,10 @@ public class MedicationRestController {
     @GetMapping("/medication/{id}")
     public MEDICATION getMedicament(@PathVariable(name = "id") Long medicamentId) throws MedicationNotFound {
         return merdicationservice.getMedication(medicamentId);
+    }
+    @GetMapping("/pharmacy")
+    public List<Pharmacy> gepharmacy() {
+        return pharmacyService.getAllPharmacy();
     }
 
     @PostMapping("/savemedication")
@@ -48,5 +59,9 @@ public class MedicationRestController {
     @PostMapping("/saveOrder")
     public Orders saveOrder(@RequestBody Orders Order) throws MedicationNotFound, OrderInvalidException {
         return ordersService.saveOrder(Order);
+    }
+    @PostMapping("/saveOrderline")
+    public OrderLines saveOrder(@RequestBody OrderLines Orderline) throws MedicationNotFound, OrderInvalidException {
+        return orderLineService.save(Orderline);
     }
 }

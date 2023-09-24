@@ -16,7 +16,6 @@ public class Pharmacy {
     private long Id;
     private String name;
     private String Address;
-    @OneToMany (mappedBy = "pharmacy")
-    private List<Orders> orders;
+
 
 }
